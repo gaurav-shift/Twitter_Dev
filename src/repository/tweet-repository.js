@@ -19,7 +19,7 @@ class TweetRepository {
     }
     async getWithComments(id){
         try {
-            const tweet = await Tweet.findById(id).populate({path:'comment'});
+            const tweet = await Tweet.findById(id).populate({path:'comment'}).lean(); //using .lean() we will get normal js obj
             return tweet;
         } catch (error) {
             console.log(error);
@@ -41,6 +41,14 @@ class TweetRepository {
         } catch (error) {
             console.log(error);
         }       
+    }
+    async getAll(offset , limit){
+        try {
+            const tweet = await Tweet.find().skip(offset).limit(limit);
+            return tweet;
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
 
