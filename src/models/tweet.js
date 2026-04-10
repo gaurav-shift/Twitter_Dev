@@ -3,27 +3,17 @@ const mongoose = require('mongoose');
 const tweetSchema = new mongoose.Schema({
     content : {
         type: String,
-        required : true
+        required : true,
+        max: [250, 'Tweet cannot be more than 250 characters'] // 2nd parameter means it is thorowing error
+
     },
-    userEmail : {
-        type: String
-    },
-    comments:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment' // just type name of the models 
-        }
-    ]
+    // We will store multiple #s in a post so...
+    hasttags: {
+        types: mongoose.Schema.Types.ObjectId,
+        ref: 'Hashtag'
+    }
 },{timestamps: true});
 
-tweetSchema.virtual('contentWithemail').get(function process(){
-    return this.content + "\n Created By" + this.userEmail;
-});
-
-tweetSchema.pre('save', async function(){
-    console.log('Inside a hook');
-    //next();
-})
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
 module.exports = Tweet;
