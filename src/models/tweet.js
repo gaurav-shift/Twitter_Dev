@@ -8,11 +8,17 @@ const tweetSchema = new mongoose.Schema({
 
     },
     // We will store multiple #s in a post so...
-    hasttags: {
-        types: mongoose.Schema.Types.ObjectId,
-        ref: 'Hashtag'
-    }
+    hashtags: [
+  {      type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hashtag'}
+    ]
 },{timestamps: true});
+
+// Custom validation for max 5 hashtags
+tweetSchema.path('hashtags').validate(function(value) {
+    return value.length <= 5;
+}, 'A tweet can have maximum 5 hashtags');
+
 
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
