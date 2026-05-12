@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-
+//const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const tweetSchema = new mongoose.Schema({
     content : {
         type: String,
@@ -22,4 +22,5 @@ tweetSchema.path('hashtags').validate(function(value) {
 
 
 const Tweet = mongoose.model('Tweet', tweetSchema);
-module.exports = Tweet;
+//module.exports = Tweet;
+export default Tweet;
