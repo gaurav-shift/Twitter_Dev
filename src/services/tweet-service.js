@@ -9,8 +9,16 @@ class TweetService {
 
     async create(data){
         const content = data.content;
-        const tags = content.match(/#[a-zA-Z0-9_]+/g).map((tag) => tag.substring(1)); // this regex exrtracts hashtags
+        const tags = [...new Set( // Set will remove duplicates             
+            content.match(/#[a-zA-Z0-9_]+/g)
+            .map(tag => tag.substring(1).toLowerCase())
+        )]; // this regex exrtracts hashtags
+
        // tags = tags.map((tag) => tag.substring(1));
+
+        if(tags.length > 5){
+        throw new Error('A tweet can have maximum 5 hashtags');
+        }
         
         const tweet = await this.tweetRepository.create(data);
 
