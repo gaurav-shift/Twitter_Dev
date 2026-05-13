@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "start": "npx nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^2.2.2",
     "express": "^5.2.1",
     "mongoose": "^9.3.3",
     "nodemon": "^3.1.14"
