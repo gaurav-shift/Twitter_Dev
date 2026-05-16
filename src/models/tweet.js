@@ -13,6 +13,12 @@ const tweetSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref:'Like',
         }
+    ],
+    comments: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Comment',
+        }
     ]
     // We will store multiple #s in a post so...
 //     hashtags: [

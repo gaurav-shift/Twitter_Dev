@@ -38,7 +38,12 @@ class TweetService {
 
         return tweet;
     }
+    async getTweet(tweetId){
+        const tweet = await this.tweetRepository.getWithComments(tweetId);
+        return tweet;
+    }
 }
+
 
 //module.exports = TweetService;
 

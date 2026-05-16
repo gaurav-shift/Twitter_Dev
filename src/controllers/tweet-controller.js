@@ -1,4 +1,4 @@
-import { response } from "express";
+//import { response } from "express";
 import TweetService from "../services/tweet-service.js";
 
 const tweetService = new TweetService();
@@ -16,6 +16,26 @@ export const createTweet = async (req, res) => {
             success: false,
             message: 'Something went wrong',
             data: { },
+            err: error
+        });
+    }
+}
+
+export const getTweet = async (req, res) => {
+    try {
+        const response = await tweetService.getTweet(req.params.id);
+        return res.status(200).json({
+            success: true,
+            message: 'Successfully fetched the tweet',
+            data : response,
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            data: {},
             err: error
         });
     }
